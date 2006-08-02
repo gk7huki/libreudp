@@ -16,6 +16,34 @@ http://www.scons.org/
 Stand-alone Windows build available also:
 https://developer.berlios.de/project/showfiles.php?group_id=2672
 
+---
+
+Some information:
+
+this library currently implements a simple resending
+UDP protocol. The resending is achieved by a simple
+ACK protocol: if ACK is not received during the timeout
+interval, the packet is resend again until resend
+threshold is reached (defaults: timeout 2 secs,
+send tries 3) with timeouts and resend. It follows pretty 
+much the same interface as UDP sockets.
+It's good to know the following details:
+
+- the library sends acks only when send() method is
+  called. If you have no payload to send after receive
+  you can also just call send with NULL payload and 0
+  length to cause ReUDP library to send whatever it
+  needs to send.
+- if the socket is set to non-blocking mode and the
+  payload could not be sent because would block, 
+  the library will store the payload in a queue of buffers
+  and will try sending it automatically when send()
+  is called again. The send() method then returns success
+  to the caller.
+- use needs_to_send() and needs_to_send_when() methods to
+  determine if the library has to do sending and when
+  (absolute time).
+  
 Arto Jalkanen
 ajalkane@gmail.com
 
