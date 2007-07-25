@@ -16,14 +16,24 @@ libs = ['ACE']
 defs = ['ACE_AS_STATIC_LIBS', ('ACE_NTRACE', 1)]
 flgs = ['-Wall']
 
-# update the environment with options from fltk-config
-# static_libs = ['/usr/local/lib/libFOX.a']
+# Libs that built exes need. By default nothing but 
+# platform specific SConstruct files might add here
+exe_libs = []
+
+## Uncomment and provide correct paths for the following lines 
+## if UnitTests are wanted. UnitTests can be run with the
+## command 'scons test'
+# lib_search_path.append('#../../../libs/UnitTest++')
+# include_search_path.append('#../../../libs/UnitTest++/src')
+# test_libs = ['UnitTest++']
 
 #### You should not change these.  These are only here
 #### If you want to start your own build setup with a
 #### different layout than mine.
-source_base_dir = 'src'
-build_base_dir = 'build'
-target_name = 'reudp'
+source_base_dir  = 'src'
+lib_source_dir   = 'src/reudp'
+test_source_dir  = 'src/tests'
+build_base_dir   = 'build'
+target_name      = 'reudp'
 
 

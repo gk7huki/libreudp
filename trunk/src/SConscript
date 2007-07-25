@@ -1,0 +1,17 @@
+# import these variables from the parent build script
+Import('env', 'exe_env', 'lib_sources', 'target_name', 'target_dir',
+       'test_sources', 'test_libs')
+
+env.Library(target=target_name, source=lib_sources)
+
+# Unit test runner
+if test_sources:
+	tst = exe_env.Clone()
+	tst.Append(LIBS=test_libs)
+	
+	test_prg = tst.Program(target="test", source=test_sources)
+	test_alias = tst.Alias('test', test_prg, test_prg[0].path)
+	tst.AlwaysBuild(test_alias)
+
+print "targetname: " + target_name
+
