@@ -1,0 +1,20 @@
+Some simple example programs to get an idea
+how to use the library.
+
+To build the examples issue the following command on 
+main level:
+scons example
+
+simplified_echo_server:
+A naive implementation of ReUDP echo server...
+A real implementation should use ACE reactor
+to poll when acks should be sent and when
+input arrives. TODO
+Example: ./simplified_echo_server 16999
+
+simplified_echo_client:
+A naive implementation of ReUDP echo client..
+A real implementation should use ACE reactor
+to poll when acks should be sent and when
+input arrives. TODO
+Example: ./simplified_echo_client 16999
