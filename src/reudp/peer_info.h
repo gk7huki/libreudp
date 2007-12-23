@@ -1,14 +1,14 @@
-#ifndef _REUDP_PEER_INFO_H_
-#define _REUDP_PEER_INFO_H_
+#ifndef REUDP_PEER_INFO_H
+#define REUDP_PEER_INFO_H
 
 /*
  * @file    peer_info
  * @date    Apr 10, 2005
  * @author  Arto Jalkanen
- * @brief   Stores information about reudp peer
+ * @brief   Stores common information about reudp peers
  * 
  * Contains information needed by reudp for reliable datagram transfer
- * to one peer. Currently, only the running sequence number is stored.
+ * all peers. Currently, only the running sequence number is stored.
  *  
  */
 #include "common.h"
@@ -17,7 +17,6 @@ namespace reudp {
     class peer_info {
         // Current sequence number used for sending
         reudp::uint32_t  _sequence;
-        time_value_type  _ping;  // not used yet
     public:
         inline peer_info()                          : _sequence(0) {}
         inline peer_info(reudp::uint32_t start_seq) : _sequence(start_seq) {}

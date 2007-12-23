@@ -1,5 +1,5 @@
-#ifndef _REUDP_EXCEPTION_H_
-#define _REUDP_EXCEPTION_H_
+#ifndef REUDP_EXCEPTION_H
+#define REUDP_EXCEPTION_H
 /**
  * @file    exception.h
  * @date    Apr 9, 2005

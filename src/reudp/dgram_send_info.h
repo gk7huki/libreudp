@@ -1,5 +1,5 @@
-#ifndef _REUDP_DGRAM_SEND_INFO_H_
-#define _REUDP_DGRAM_SEND_INFO_H_
+#ifndef REUDP_DGRAM_SEND_INFO_H
+#define REUDP_DGRAM_SEND_INFO_H
 
 /*
  * @file    dgram_send_info
@@ -8,7 +8,8 @@
  * @brief   Stores information about sent datagram
  * 
  * Contains information needed for resending a packet. Has 
- * the sent datagram's sequence number, base timestamp value and
+ * the sent datagram's sequence number, base timestamp value 
+ * (the time when first datagram was sent) and
  * pointer and size of the datagram content.
  *  
  */
@@ -25,7 +26,8 @@ namespace reudp {
     public:
         dgram_send_info() : _data_block(NULL),
                             _sequence(0),
-                            _send_count(0) {}
+                            _send_count(0)
+                            {}
                             
         ~dgram_send_info() {
             delete _data_block;

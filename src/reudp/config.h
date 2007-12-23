@@ -1,5 +1,5 @@
-#ifndef _REUDP_CONFIG_H_
-#define _REUDP_CONFIG_H_
+#ifndef REUDP_CONFIG_H
+#define REUDP_CONFIG_H
 
 #include <algorithm>
 #include "common.h"

@@ -9,6 +9,9 @@ clean: clean_release
 
 all: release debug
 
+test: all
+	scons test
+	
 clean_all: clean_release clean_debug
 
 release: build_release

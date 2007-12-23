@@ -1,5 +1,5 @@
-#ifndef _REUDP_MESSAGE_BLOCK_H_
-#define _REUDP_MESSAGE_BLOCK_H_
+#ifndef REUDP_MESSAGE_BLOCK_H
+#define REUDP_MESSAGE_BLOCK_H
 
 /*
  * @file    message_block.h

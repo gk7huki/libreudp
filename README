@@ -11,6 +11,12 @@ just run scons
 Debug build:
 run scons debug=yes
 
+Building the examples:
+scons example
+
+Building the unit tests:
+scons test
+
 For building scons is needed:
 http://www.scons.org/
 Stand-alone Windows build available also:

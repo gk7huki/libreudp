@@ -1,5 +1,5 @@
-#ifndef _REUDP_SEQACK_ADAPTER_H_
-#define _REUDP_SEQACK_ADAPTER_H_
+#ifndef REUDP_SEQACK_ADAPTER_H
+#define REUDP_SEQACK_ADAPTER_H
 
 /**
  * @file    seqack_adapter.h
@@ -44,7 +44,11 @@ namespace reudp {
      *   - queue_send_when
      *     - returns the approximate time when send should be called next.
      *       time_value_type::max_time if no need currently for sending
-     *       (when more material recv:d or sent can change)
+     *       (when more material recv:d or sent can change). You
+     *       should not use the value returned by this call if
+     *       queue_send_empty returns false. If queue_send_empty
+     *       returns false then send() should be called immediately
+     *       and queue_send_empty may not return a valid value.
      *   - packet_done_cb
      *     - set a callback that is called when a packet's final
      *       'fate' is determined, ie. was it a success, gived up due
@@ -55,7 +59,7 @@ namespace reudp {
      *   - structure aux_data that has to contain at least the
      *     following fields:
      *     - type_id   (numerical 0-16)
-     *     - sequence  (uin32)
+     *     - sequence  (uint32)
      *   - constants that provides at least the following identifiers for
      *     different packet types:
      *     - dgram_user
