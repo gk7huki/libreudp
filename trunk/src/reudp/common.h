@@ -1,5 +1,5 @@
-#ifndef _REUDP_COMMON_H_
-#define _REUDP_COMMON_H_
+#ifndef REUDP_COMMON_H
+#define REUDP_COMMON_H
 
 #include <ace/Log_Msg.h>
 #include <ace/Addr.h>
@@ -35,17 +35,7 @@ namespace reudp {
         static const int success = 1;
         static const int timeout = 2;
         static const int failure = 3;
-    }
-    
-    // various error codes
-    namespace error_code {
-        enum {
-            out_of_memory   = 1,
-            invalid_dgram   = 2,
-            call_error      = 3,
-            internal        = 4,            
-        };
-    }
+    }    
 }
 
 #endif //_REUDP_COMMON_H_

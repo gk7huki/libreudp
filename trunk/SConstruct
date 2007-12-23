@@ -54,7 +54,7 @@ exe_env.Append(LIBS=exe_libs)
 # Once scons has its Glob this trickery can be
 # probably removed and selection of files moved
 # to the src/SConscript file.
-lib_sources = test_sources = []
+lib_sources = example_sources = test_sources = []
 lib_sources = DirGlob(dir         = lib_source_dir, 
                       match       = '*.cpp', 
                       dir_match   = source_base_dir,
@@ -62,6 +62,7 @@ lib_sources = DirGlob(dir         = lib_source_dir,
 
 env_exports = ['env', 'exe_env', 'lib_sources', 
               'target_name', 'target_dir',
+              'example_sources',
               'test_sources', 'test_libs']
 
 if 'test' in BUILD_TARGETS:
@@ -72,6 +73,14 @@ if 'test' in BUILD_TARGETS:
 else:
     test_sources = []
     test_libs = []
+
+if 'example' in BUILD_TARGETS:
+    example_sources = DirGlob(dir         = example_source_dir, 
+                              match       = '*.cpp', 
+                              dir_match   = source_base_dir,
+                              dir_replace = build_dir)
+else:
+    example_sources = []
 
 Export(env_exports)
 # The first SConscripts calls platform specific

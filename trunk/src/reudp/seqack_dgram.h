@@ -1,5 +1,5 @@
-#ifndef _REUDP_SEQACK_DGRAM_H_
-#define _REUDP_SEQACK_DGRAM_H_
+#ifndef REUDP_SEQACK_DGRAM_H
+#define REUDP_SEQACK_DGRAM_H
 
 /**
  * @file    seqack_dgram.h

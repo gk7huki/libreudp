@@ -1,5 +1,5 @@
-#ifndef _REUDP_DATA_SEQNUM_H_
-#define _REUDP_DATA_SEQNUM_H_
+#ifndef REUDP_DATA_SEQNUM_H
+#define REUDP_DATA_SEQNUM_H
 
 #include "common.h"
 #include "exception.h"

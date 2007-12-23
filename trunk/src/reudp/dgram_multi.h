@@ -1,5 +1,5 @@
-#ifndef _REUDP_DGRAM_MULTI_H
-#define _REUDP_DGRAM_MULTI_H
+#ifndef REUDP_DGRAM_MULTI_H
+#define REUDP_DGRAM_MULTI_H
 
 /**
  * @file    dgram.h

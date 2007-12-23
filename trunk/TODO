@@ -1,0 +1,3 @@
+- ack_resend_strategy: send_count unnecessarily large (uint32_t)
+- check config module. It's no longer satisfactory considering the
+  different timeout strategies.
