@@ -2,7 +2,7 @@
 #define REUDP_DGRAM_MULTI_H
 
 /**
- * @file    dgram.h
+ * @file    dgram_multi_t.h
  * @date    Apr 6, 2005
  * @author  Arto Jalkanen
  * @brief   Extends dgram with multirecipient sending
@@ -11,10 +11,10 @@
 #include <functional>
 
 #include "common.h"
-#include "dgram.h"
 
 namespace reudp {   
-    class dgram_multi : public dgram {
+    template <class T>
+    class dgram_multi_t : public T {
         template <class _Value>
         class _nop : public std::unary_function<_Value, addr_type> {
         public:
@@ -24,8 +24,8 @@ namespace reudp {
         };      
 
     public:
-        dgram_multi() {}
-        virtual ~dgram_multi() {}
+        dgram_multi_t() {}
+        virtual ~dgram_multi_t() {}
 
         template<typename _AddrIter>
         ssize_t 
@@ -59,7 +59,7 @@ namespace reudp {
             ssize_t success = 0;
             ssize_t bytes;
             for (; first != last; ++first) {
-                bytes = dgram::send(buf, n, trans(*first), flags);
+                bytes = T::send(buf, n, trans(*first), flags);
                 if (bytes != -1) success++;
                 // TODO if EWOULDBLOCK maybe stop the loop
             }
