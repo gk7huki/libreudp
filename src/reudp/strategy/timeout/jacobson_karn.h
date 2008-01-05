@@ -2,7 +2,6 @@
 #define REUDP_STRATEGY_TIMEOUT_JACOBSONKARN_H
 
 #include <map>
-#include <iostream>
 
 #include "../../common.h"
 #include "../../config.h"
@@ -77,11 +76,11 @@ namespace timeout {
             	p.srtt = rtt;
             	p.rttvar = rtt >> 1;
             } else {
-	            p.rttvar += (abs(p.srtt - rtt) - p.rttvar) >> 2;
-	            p.srtt   += (rtt - p.srtt) >> 3;
+                p.rttvar += (abs(p.srtt - rtt) - p.rttvar) >> 2;
+                p.srtt   += (rtt - p.srtt) >> 3;
             }
             p.rto = p.srtt + (p.rttvar << 2);
-        	p.rto = std::max(rto_min, p.rto);
+            p.rto = std::max(rto_min, p.rto);
             p.rto = std::min(rto_max, p.rto);
 
             ACE_DEBUG((LM_DEBUG,
