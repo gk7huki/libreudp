@@ -673,7 +673,6 @@ namespace reudp {
     {       
         uint32_t seq              = _queue_send.front();
         const dgram_send_info &si = _dgram_send_info_map[seq];
-        aux_data rad;
         
         ad->sequence   = si.sequence();
         ad->type_id    = dgram_user;
