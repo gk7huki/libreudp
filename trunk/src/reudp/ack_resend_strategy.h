@@ -263,11 +263,14 @@ namespace reudp {
             // is exhausted.
             if (_dgram_send_info_map.count(seq)) {
                 const dgram_send_info &si = _dgram_send_info_map[seq];
+                typename T::peer_struct &ps = _peer_container[si.addr()];
+                _strategy.send_timeout(now, si, ps);
+                
                 // if (si.send_count() < 3)
                 ACE_DEBUG((LM_DEBUG, "%Idgram %d has been resent %d/%d times\n",
                                      seq, si.send_count(), 
-                                     _strategy.send_try_count(_peer_container[si.addr()])));
-                if (si.send_count() < _strategy.send_try_count(_peer_container[si.addr()]))
+                                     _strategy.send_try_count(ps)));
+                if (si.send_count() < _strategy.send_try_count(ps))
                     return false;
                 ACE_DEBUG((LM_DEBUG, "%Idgram %d has been resent %d times " \
                                      "without reply, giving up\n",
@@ -322,9 +325,6 @@ namespace reudp {
     void
     ack_resend_strategy<T,P,C>::_queue_timeout_push(
         const dgram_send_info &si
-        /* const addr_inet_type &addr,
-        uint32_t seq,
-        uint32_t send_count */        
     ) {
         // add this datagram to timeout queue
         time_value_type now = _conf.gettimeofday();
@@ -673,6 +673,7 @@ namespace reudp {
     {       
         uint32_t seq              = _queue_send.front();
         const dgram_send_info &si = _dgram_send_info_map[seq];
+        aux_data rad;
         
         ad->sequence   = si.sequence();
         ad->type_id    = dgram_user;

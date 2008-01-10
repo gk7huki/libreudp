@@ -41,9 +41,9 @@ namespace timeout {
         inline time_value_type next_resend_time(
             const time_value_type &now,
             const dgram_send_info &/*si*/,
-            peer_struct &peer_struct
+            peer_struct &ps
         ) {
-            return now + time_value_type(0, peer_struct.rto * 1000);                       
+            return now + time_value_type(0, ps.rto * 1000);                       
         }
         inline uint32_t send_try_count(peer_struct &/*ps*/) {
             // By default return the value from config
@@ -52,9 +52,19 @@ namespace timeout {
         inline void packet_sent(
             const time_value_type &now,
             const dgram_send_info &si,
-            peer_struct &peer_struct
+            peer_struct &p
         ) {}
-        
+
+        inline void send_timeout(
+            const time_value_type &/*now*/,
+            const dgram_send_info &/*si*/,
+            peer_struct &p
+        ) {
+            // Doubles retransimission timeout value
+            p.rto <<= 1;
+            p.rto = std::min(rto_max, p.rto);
+        }
+
         // Called when an ack is received for existing peer.
         inline void ack_received(
             const time_value_type &now,
