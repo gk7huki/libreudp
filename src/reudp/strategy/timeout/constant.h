@@ -35,6 +35,13 @@ namespace timeout {
             const dgram_send_info &si,
             peer_struct &/*ps*/
         ) {}
+        
+        inline void send_timeout(
+            const time_value_type &now,
+            const dgram_send_info &si,
+            peer_struct &peer_struct
+        ) {}
+        
         inline uint32_t send_try_count(peer_struct &/*ps*/) {
             // By default return the value from config
             return config::send_try_count();

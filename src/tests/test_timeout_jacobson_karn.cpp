@@ -62,6 +62,28 @@ TEST_FIXTURE(fixture_addr, initial_rttvar) {
     CHECK_EQUAL(750, timeout::jacobson_karn::peer_struct().rttvar);
 }
 
+// Checks that the retransmission timeout doubles after each packet timeout
+TEST_FIXTURE(fixture_addr, rto_doubles) {
+    const timeout::jacobson_karn::peer_struct &ps = ps_map[addr[0]];
+    int32_t rto_initial = ps.rto;
+    // Simulate a packet miss
+    tjk.send_timeout(now, si, ps_map[addr[0]]);
+    // .75 seconds = 750 milliseconds  
+    CHECK_EQUAL(rto_initial * 2, ps.rto);
+}
+
+// Checks that the retransmission timeout doubling doesn't exceed bounds
+TEST_FIXTURE(fixture_addr, rto_doubles_limitd_by_max) {    
+    const timeout::jacobson_karn::peer_struct &ps = ps_map[addr[0]];
+    int32_t rto_previous = 0;
+    do {
+        rto_previous = ps.rto;
+        // Simulate a packet miss
+        tjk.send_timeout(now, si, ps_map[addr[0]]);
+        CHECK(ps.rto <= timeout::jacobson_karn::rto_max);
+    } while (rto_previous < ps.rto && ps.rto < timeout::jacobson_karn::rto_max);
+}
+
 TEST_UTILITY(until_ack,\
     (fixture_addr &f,
      const reudp::time_value_type &start,
@@ -169,7 +191,7 @@ TEST_FIXTURE(fixture_addr, rto_minimum_1sec) {
     std::cout << "/START" << std::endl;     
 }
 
-TEST_FIXTURE(fixture_addr, rto_maximum_1sec) {
+TEST_FIXTURE(fixture_addr, rto_maximum_32sec) {
     int32_t prev    = 0;
     int32_t max_rto = 32 * 1000;
     int32_t rtt_set = 64 * 1000;
