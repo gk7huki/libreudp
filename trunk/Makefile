@@ -7,7 +7,7 @@ default: release
 
 clean: clean_release
 
-all: release debug
+all: release
 
 test: all
 	scons test
