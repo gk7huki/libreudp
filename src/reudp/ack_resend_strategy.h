@@ -5,7 +5,8 @@
 #include <deque>
 #include <queue>
 #include <memory>
-#include <ace/OS.h>
+#include <ace/OS_NS_time.h>
+#include <ace/OS_NS_errno.h>
 
 #include "common.h"
 #include "config.h"
